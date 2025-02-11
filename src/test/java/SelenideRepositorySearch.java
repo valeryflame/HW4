@@ -1,3 +1,4 @@
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -26,5 +27,17 @@ public class SelenideRepositorySearch {
         $(".wiki-pages-box").$$("li").findBy(text("SoftAssertions")).should(appear).click();
         $("a[href='/selenide/selenide/wiki/SoftAssertions']").click();
         $(".wiki-pages-box").shouldHave(text("Using JUnit5 extend test class"));
+        $(".markdown-body").shouldHave(text("""
+                @ExtendWith({SoftAssertsExtension.class})
+                class Tests {
+                  @Test
+                  void test() {
+                    Configuration.assertionMode = SOFT;
+                    open("page.html");
+
+                    $("#first").should(visible).click();
+                    $("#second").should(visible).click();
+                  }
+                }"""));
     }
 }
