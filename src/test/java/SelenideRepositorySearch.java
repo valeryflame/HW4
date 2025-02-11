@@ -24,6 +24,7 @@ public class SelenideRepositorySearch {
             $$("button").findBy(text("Show 3 more pages")).scrollTo().click();
         }
         $(".wiki-pages-box").$$("li").findBy(text("SoftAssertions")).should(appear).click();
-        $(".wiki-pages-box").shouldHave(text("JUnit5"));
+        $("a[href='/selenide/selenide/wiki/SoftAssertions']").click();
+        $(".wiki-pages-box").shouldHave(text("Using JUnit5 extend test class"));
     }
 }
